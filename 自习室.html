@@ -11,12 +11,9 @@
 :root {
   --font: -apple-system, 'Helvetica Neue', 'PingFang SC', sans-serif;
   --font-mono: 'SF Mono', 'Menlo', monospace;
-  --radius: 16px;
   --radius-lg: 24px;
   --radius-pill: 40px;
   --blur: 40px;
-  --blur-heavy: 60px;
-  /* Light mode */
   --card-bg: rgba(255,255,255,0.55);
   --card-border: rgba(255,255,255,0.35);
   --card-shadow: 0 8px 40px rgba(0,0,0,0.12);
@@ -25,7 +22,6 @@
   --text-tertiary: #aeaeb2;
   --accent: #8B6F4E;
   --accent-hover: #7A5E3E;
-  --accent-light: rgba(139,111,78,0.15);
   --fill: rgba(120,120,128,0.12);
   --fill-hover: rgba(120,120,128,0.18);
   --separator: rgba(60,60,67,0.06);
@@ -64,8 +60,6 @@ html, body {
   opacity: 1;
   z-index: 1;
 }
-
-/* ── Dynamic gradient overlay ── */
 .scene-vignette {
   position: absolute; inset: 0; z-index: 2;
   background:
@@ -118,15 +112,9 @@ html, body {
   transform: rotate(-90deg);
   width: 100%; height: 100%;
 }
-.timer-ring-bg {
-  fill: none;
-  stroke: var(--ring-bg);
-  stroke-width: 4;
-}
+.timer-ring-bg { fill: none; stroke: var(--ring-bg); stroke-width: 4; }
 .timer-ring-fg {
-  fill: none;
-  stroke: var(--ring-fg);
-  stroke-width: 4;
+  fill: none; stroke: var(--ring-fg); stroke-width: 4;
   stroke-linecap: round;
   transition: stroke-dashoffset 0.6s cubic-bezier(0.25,0.1,0.25,1);
 }
@@ -143,7 +131,6 @@ html, body {
   color: var(--text);
   line-height: 1;
   font-variant-numeric: tabular-nums;
-  transition: color 0.3s;
 }
 .timer-display .label {
   font-size: 13px;
@@ -154,13 +141,11 @@ html, body {
   text-transform: uppercase;
 }
 
-/* Segmented control (Apple style) */
 .segmented {
   display: inline-flex;
   background: var(--fill);
   border-radius: var(--radius-pill);
   padding: 2px;
-  gap: 0;
   margin-bottom: 28px;
 }
 .segmented button {
@@ -184,7 +169,6 @@ html, body {
   box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
 }
 
-/* Button styles */
 .btn-row {
   display: flex;
   gap: 10px;
@@ -204,15 +188,9 @@ html, body {
   min-width: 110px;
 }
 .btn:active { transform: scale(0.94); }
-.btn-primary {
-  background: var(--accent);
-  color: #fff;
-}
+.btn-primary { background: var(--accent); color: #fff; }
 .btn-primary:hover { background: var(--accent-hover); }
-.btn-secondary {
-  background: var(--fill);
-  color: var(--text-secondary);
-}
+.btn-secondary { background: var(--fill); color: var(--text-secondary); }
 .btn-secondary:hover { background: var(--fill-hover); }
 
 .focus-line {
@@ -223,15 +201,10 @@ html, body {
   margin-top: 20px;
   letter-spacing: 2px;
   min-height: 18px;
-  transition: opacity 0.5s;
 }
 
 /* ── Tab bar ── */
-.tab-bar-wrap {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
+.tab-bar-wrap { width: 100%; display: flex; justify-content: center; }
 .tab-bar {
   display: inline-flex;
   background: rgba(255,255,255,0.35);
@@ -263,67 +236,59 @@ html, body {
   backdrop-filter: blur(10px);
 }
 
-/* ── Panel foundation ── */
+/* ── Panel ── */
 .panel { display: none; padding: 24px 28px; }
 .panel.active { display: block; }
 
-/* ── Background presets ── */
-.bg-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 4px;
-}
-.bg-preset {
-  aspect-ratio: 16/10;
-  border-radius: 12px;
-  border: 1.5px solid transparent;
+/* ── Background upload ── */
+.bg-upload-area {
+  border: 1.5px dashed var(--separator);
+  border-radius: 16px;
+  padding: 40px 20px;
+  text-align: center;
   cursor: pointer;
   transition: all 0.25s;
+  background: var(--fill);
   position: relative;
-  overflow: hidden;
   -webkit-tap-highlight-color: transparent;
 }
-.bg-preset:active { transform: scale(0.94); }
-.bg-preset.active { border-color: var(--accent); }
-.bg-preset .thumb {
-  position: absolute; inset: 0;
-  background-size: cover;
-  background-position: center;
-}
-.bg-preset .label {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 6px 8px;
-  font-size: 11px;
+.bg-upload-area:active { transform: scale(0.97); }
+.bg-upload-area .icon { font-size: 36px; display: block; margin-bottom: 10px; opacity: 0.6; }
+.bg-upload-area .hint {
+  font-size: 14px;
   font-weight: 500;
-  color: #fff;
-  background: linear-gradient(transparent, rgba(0,0,0,0.6));
-  font-family: var(--font);
+  color: var(--text-secondary);
 }
-.bg-preset.custom {
-  border: 1.5px dashed var(--separator);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--fill);
+.bg-upload-area .sub {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 4px;
 }
-.bg-preset.custom .icon {
-  font-size: 24px;
-  opacity: 0.5;
-}
-.bg-preset.custom input {
+.bg-upload-area input {
   position: absolute; inset: 0;
   opacity: 0; cursor: pointer;
 }
-
-.bg-label {
-  text-align: center;
+.bg-upload-area.has-bg {
+  border-style: solid;
+  border-color: var(--accent);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.bg-upload-area.has-bg .icon { font-size: 28px; margin-bottom: 0; }
+.bg-upload-area.has-bg .hint { flex: 1; text-align: left; }
+.bg-upload-area.has-bg .change-btn {
   font-size: 12px;
   font-weight: 500;
-  color: var(--text-secondary);
-  margin-top: 4px;
+  padding: 6px 14px;
+  border-radius: 16px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  cursor: pointer;
 }
+.bg-upload-area.has-bg .change-btn:active { opacity: 0.8; }
 
 /* ── Sound board ── */
 .sound-board {
@@ -352,9 +317,7 @@ html, body {
   color: var(--text-secondary);
   font-family: var(--font);
 }
-.sound-btn.playing {
-  background: var(--accent);
-}
+.sound-btn.playing { background: var(--accent); }
 .sound-btn.playing .sname { color: #fff; }
 
 .volume-row {
@@ -401,9 +364,7 @@ html, body {
   padding-top: 14px;
   border-top: 0.5px solid var(--separator);
 }
-.stat-item {
-  text-align: center;
-}
+.stat-item { text-align: center; }
 .stat-item .num {
   display: block;
   font-family: var(--font-mono);
@@ -437,7 +398,7 @@ html, body {
   color: var(--text);
   outline: none;
 }
-.music-input-row input:focus { background: rgba(120,120,128,0.18); }
+.music-input-row input:focus { background: var(--fill-hover); }
 .music-input-row input::placeholder { color: var(--text-tertiary); }
 .music-input-row button {
   font-family: var(--font);
@@ -465,6 +426,7 @@ html, body {
   justify-content: center;
   font-size: 13px;
   color: var(--text-tertiary);
+  margin-bottom: 14px;
 }
 .music-embed iframe {
   width: 100%;
@@ -472,39 +434,90 @@ html, body {
   border-radius: 12px;
 }
 
-.music-quick {
+/* ── Music playlist ── */
+.music-playlist-header {
   display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
 }
-.music-quick a {
-  font-size: 12px;
-  font-weight: 500;
-  padding: 6px 14px;
-  border-radius: 16px;
-  background: var(--fill);
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: all 0.25s;
-  -webkit-tap-highlight-color: transparent;
-}
-.music-quick a:active { background: var(--accent); color: #fff; }
-
-/* ── Todo ── */
-.todo-header {
-  margin-bottom: 14px;
-}
-.todo-header h3 {
-  font-size: 14px;
+.music-playlist-header h4 {
+  font-size: 13px;
   font-weight: 600;
   color: var(--text);
 }
-.todo-add {
-  display: flex;
-  gap: 8px;
+.music-playlist-header .count {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-weight: 500;
 }
+.music-playlist {
+  list-style: none;
+  max-height: 160px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.music-playlist li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 0.5px solid var(--separator);
+}
+.music-playlist li:last-child { border-bottom: none; }
+.music-playlist li .pl-icon { font-size: 16px; flex-shrink: 0; opacity: 0.6; }
+.music-playlist li .pl-name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.music-playlist li .pl-source {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: var(--fill);
+  flex-shrink: 0;
+}
+.music-playlist li .pl-play {
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.music-playlist li .pl-play:active { background: var(--fill); }
+.music-playlist li .pl-del {
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  transition: all 0.2s;
+}
+.music-playlist li .pl-del:active { color: #c0392b; }
+.music-playlist-empty {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  padding: 20px 0;
+}
+
+/* ── Todo ── */
+.todo-header { margin-bottom: 14px; }
+.todo-header h3 { font-size: 14px; font-weight: 600; color: var(--text); }
+.todo-add { display: flex; gap: 8px; }
 .todo-add input {
   flex: 1;
   font-family: var(--font);
@@ -531,7 +544,6 @@ html, body {
   transition: all 0.25s;
 }
 .todo-add button:active { transform: scale(0.94); }
-
 .todo-list {
   list-style: none;
   margin-top: 6px;
@@ -557,10 +569,7 @@ html, body {
   transition: all 0.2s;
   -webkit-tap-highlight-color: transparent;
 }
-.todo-list li .check.done {
-  background: var(--accent);
-  border-color: var(--accent);
-}
+.todo-list li .check.done { background: var(--accent); border-color: var(--accent); }
 .todo-list li .check.done::after {
   content: '';
   width: 8px; height: 4px;
@@ -568,16 +577,8 @@ html, body {
   border-bottom: 1.5px solid #fff;
   transform: rotate(-45deg) translateY(-1px);
 }
-.todo-list li .text {
-  flex: 1;
-  font-size: 14px;
-  font-weight: 400;
-  transition: all 0.2s;
-}
-.todo-list li .text.done {
-  text-decoration: line-through;
-  color: var(--text-tertiary);
-}
+.todo-list li .text { flex: 1; font-size: 14px; font-weight: 400; transition: all 0.2s; }
+.todo-list li .text.done { text-decoration: line-through; color: var(--text-tertiary); }
 .todo-list li .del {
   width: 28px; height: 28px;
   border: none;
@@ -586,11 +587,8 @@ html, body {
   font-size: 15px;
   cursor: pointer;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   transition: all 0.2s;
-  -webkit-tap-highlight-color: transparent;
 }
 .todo-list li .del:active { background: rgba(0,0,0,0.05); color: #c0392b; }
 
@@ -599,7 +597,7 @@ html, body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--separator); border-radius: 2px; }
 
-/* ── iPad responsive ── */
+/* ── Responsive ── */
 @media (min-width: 600px) {
   .app { padding: 80px 40px 120px; }
   .app-inner { max-width: 440px; gap: 20px; }
@@ -618,12 +616,10 @@ html, body {
   .sound-btn { padding: 10px 4px; }
   .sound-btn .icon { font-size: 18px; }
   .sound-btn .sname { font-size: 10px; }
-  .bg-grid { gap: 6px; }
   .segmented button { padding: 6px 14px; font-size: 12px; }
   .btn { padding: 10px 24px; font-size: 14px; min-width: 90px; }
 }
 
-/* ── Safe area for iPhone notch ── */
 @supports (padding: max(0px)) {
   .app { padding-left: max(24px, env(safe-area-inset-left)); padding-right: max(24px, env(safe-area-inset-right)); padding-top: max(60px, env(safe-area-inset-top)); padding-bottom: max(100px, env(safe-area-inset-bottom)); }
 }
@@ -631,17 +627,15 @@ html, body {
 </head>
 <body>
 
-<!-- Scene Background -->
 <div class="scene" id="scene">
   <div class="scene-layer dim"></div>
   <div class="scene-vignette"></div>
 </div>
 
-<!-- App -->
 <div class="app">
   <div class="app-inner">
 
-    <!-- Timer Card -->
+    <!-- Timer -->
     <div class="glass timer-card">
       <div class="timer-body">
         <div class="timer-ring-wrap">
@@ -655,18 +649,15 @@ html, body {
             <div class="label" id="timer-label">Focus</div>
           </div>
         </div>
-
         <div class="segmented" id="mode-segmented">
           <button data-min="25" data-label="Focus" class="active">专注</button>
           <button data-min="5" data-label="Break">短休</button>
           <button data-min="15" data-label="Break">长休</button>
         </div>
-
         <div class="btn-row">
           <button class="btn btn-primary" id="timer-toggle">开始学习</button>
           <button class="btn btn-secondary" id="timer-reset">重置</button>
         </div>
-
         <div class="focus-line" id="focus-quote">千里之行，始于足下</div>
       </div>
     </div>
@@ -683,8 +674,12 @@ html, body {
 
     <!-- Panel: Background -->
     <div class="glass panel active" id="panel-bg">
-      <div class="bg-grid" id="bg-grid"></div>
-      <div class="bg-label" id="current-bg-label">书房</div>
+      <div class="bg-upload-area" id="bg-upload-area">
+        <span class="icon">🖼</span>
+        <div class="hint">点击选择背景图片</div>
+        <div class="sub">支持 JPG / PNG，建议使用横构图照片</div>
+        <input type="file" accept="image/*" id="bg-upload-input">
+      </div>
     </div>
 
     <!-- Panel: Sounds -->
@@ -710,12 +705,13 @@ html, body {
       <div class="music-embed" id="music-embed">
         <span>粘贴音乐链接开始播放</span>
       </div>
-      <div class="music-quick">
-        <a href="#" data-url="https://embed.music.apple.com/cn/playlist/专注学习/pl.u-JPAZEBvCg6Jq2">🍃 专注歌单</a>
-        <a href="#" data-url="https://embed.music.apple.com/cn/playlist/放松纯音乐/pl.u-6mo4N3Jso3ob">🎵 纯音乐</a>
-        <a href="#" data-url="https://embed.music.apple.com/cn/playlist/古典钢琴/pl.u-vM6797DI5Rq">🎹 古典钢琴</a>
-        <a href="#" data-url="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO">📻 Lofi 研究</a>
+      <div class="music-playlist-header">
+        <h4>我的歌单</h4>
+        <span class="count" id="playlist-count">0 首</span>
       </div>
+      <ul class="music-playlist" id="music-playlist">
+        <li class="music-playlist-empty">还没有收藏的歌单</li>
+      </ul>
     </div>
 
     <!-- Panel: Todo -->
@@ -733,29 +729,8 @@ html, body {
 
 <script>
 // ═══════════════════════════════════════════
-//  Background Presets — Unsplash aerial/landscape
+//  Data
 // ═══════════════════════════════════════════
-const PRESETS = [
-  { id: 'study', label: '书房',
-    url: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1920&q=80',
-    thumb: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=400&q=60' },
-  { id: 'dusk', label: '黄昏',
-    url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80',
-    thumb: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=60' },
-  { id: 'night', label: '夜晚',
-    url: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80',
-    thumb: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&q=60' },
-  { id: 'rain', label: '雨窗',
-    url: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1920&q=80',
-    thumb: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&q=60' },
-  { id: 'forest', label: '森林',
-    url: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=80',
-    thumb: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&q=60' },
-  { id: 'sea', label: '海边',
-    url: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1920&q=80',
-    thumb: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=400&q=60' },
-];
-
 const SOUNDS = [
   { id: 'rain',    icon: '🌧️',  name: '雨声' },
   { id: 'wind',    icon: '🍃',  name: '风声' },
@@ -787,12 +762,12 @@ const state = {
   volume: 0.5, currentSound: null,
   audioCtx: null, gainNode: null, soundNodes: {},
   todayFocus: 0, todayTodos: 0,
-  currentPreset: 'study', customBg: null,
-  preloadedImages: {},
+  customBg: null,
+  playlist: [], // { id, name, url, source, icon }
 };
 
 // ═══════════════════════════════════════════
-//  DOM
+//  DOM refs
 // ═══════════════════════════════════════════
 const $ = id => document.getElementById(id);
 const scene       = $('scene');
@@ -802,8 +777,8 @@ const timerLabel  = $('timer-label');
 const timerToggle = $('timer-toggle');
 const timerReset  = $('timer-reset');
 const focusQuote  = $('focus-quote');
-const bgGrid      = $('bg-grid');
-const bgLabel     = $('current-bg-label');
+const bgArea      = $('bg-upload-area');
+const bgInput     = $('bg-upload-input');
 const soundBoard  = $('sound-board');
 const volSlider   = $('volume-slider');
 const volLabel    = $('vol-label');
@@ -812,6 +787,8 @@ const todayTodos  = $('today-todos');
 const musicInput  = $('music-url-input');
 const musicLoad   = $('music-load-btn');
 const musicEmbed  = $('music-embed');
+const playlistEl  = $('music-playlist');
+const playlistCnt = $('playlist-count');
 const todoInput   = $('todo-input');
 const todoAdd     = $('todo-add-btn');
 const todoList    = $('todo-list');
@@ -819,105 +796,48 @@ const todoList    = $('todo-list');
 const CIRCUMFERENCE = 2 * Math.PI * 42;
 
 // ═══════════════════════════════════════════
-//  Scene
+//  Background
 // ═══════════════════════════════════════════
-function preloadImages() {
-  PRESETS.forEach(p => {
-    const img = new Image();
-    img.src = p.url;
-    state.preloadedImages[p.id] = img;
-  });
-}
-
-function applyPreset(id) {
-  const preset = PRESETS.find(p => p.id === id) || PRESETS[0];
-  state.currentPreset = id;
-  state.customBg = null;
-
-  // Remove old custom image layer if any
-  const oldCustom = scene.querySelector('.scene-layer.custom');
-  if (oldCustom) oldCustom.remove();
-
-  // Find or create layer
-  let layer = scene.querySelector('.scene-layer.preset');
-  if (!layer) {
-    layer = document.createElement('div');
-    layer.className = 'scene-layer preset';
-    scene.insertBefore(layer, scene.querySelector('.scene-vignette'));
-  }
-
-  // Fade transition
-  layer.style.opacity = '0';
-  // Force reflow then set
-  requestAnimationFrame(() => {
-    layer.style.backgroundImage = `url(${preset.url})`;
-    requestAnimationFrame(() => {
-      layer.classList.add('active');
-      layer.style.opacity = '1';
-    });
-  });
-
-  bgLabel.textContent = preset.label;
-  document.querySelectorAll('.bg-preset').forEach(b => {
-    b.classList.toggle('active', b.dataset.id === id);
-  });
-
-  localStorage.setItem('zxs_preset', id);
-  localStorage.removeItem('zxs_custom_bg');
-}
-
 function applyCustomBg(url) {
   state.customBg = url;
-  let layer = scene.querySelector('.scene-layer.preset');
-  if (layer) layer.style.opacity = '0';
 
-  // Remove old custom
-  const old = scene.querySelector('.scene-layer.custom');
-  if (old) old.remove();
+  let layer = scene.querySelector('.scene-layer.custom');
+  if (!layer) {
+    layer = document.createElement('div');
+    layer.className = 'scene-layer custom';
+    scene.insertBefore(layer, scene.querySelector('.scene-vignette'));
+  }
+  layer.style.backgroundImage = `url(${url})`;
+  requestAnimationFrame(() => { layer.style.opacity = '1'; });
 
-  const custom = document.createElement('div');
-  custom.className = 'scene-layer custom';
-  custom.style.backgroundImage = `url(${url})`;
-  custom.style.opacity = '0';
-  scene.insertBefore(custom, scene.querySelector('.scene-vignette'));
-
-  requestAnimationFrame(() => {
-    custom.style.opacity = '1';
+  bgArea.classList.add('has-bg');
+  bgArea.innerHTML = `
+    <span class="icon">🖼</span>
+    <span class="hint">背景已更换</span>
+    <button class="change-btn" id="bg-change-btn">换一张</button>
+    <input type="file" accept="image/*" id="bg-upload-input">
+  `;
+  document.getElementById('bg-change-btn').addEventListener('click', e => {
+    e.stopPropagation();
+    document.getElementById('bg-upload-input').click();
   });
-
-  bgLabel.textContent = '自定义';
-  document.querySelectorAll('.bg-preset').forEach(b => b.classList.remove('active'));
-  document.querySelector('.bg-preset.custom')?.classList.add('active');
+  document.getElementById('bg-upload-input').addEventListener('change', onBgFile);
 
   localStorage.setItem('zxs_custom_bg', url);
-  localStorage.setItem('zxs_preset', 'custom');
 }
 
-function buildBgGrid() {
-  bgGrid.innerHTML = '';
-  PRESETS.forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'bg-preset' + (p.id === state.currentPreset ? ' active' : '');
-    div.dataset.id = p.id;
-    div.innerHTML = `
-      <div class="thumb" style="background-image: url(${p.thumb})"></div>
-      <span class="label">${p.label}</span>
-    `;
-    div.addEventListener('click', () => applyPreset(p.id));
-    bgGrid.appendChild(div);
-  });
+function onBgFile(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => applyCustomBg(ev.target.result);
+  reader.readAsDataURL(file);
+}
 
-  const custom = document.createElement('div');
-  custom.className = 'bg-preset custom' + (state.customBg ? ' active' : '');
-  custom.innerHTML = `<span class="icon">🖼</span><input type="file" accept="image/*" id="bg-upload">`;
-  bgGrid.appendChild(custom);
-  custom.querySelector('input').addEventListener('change', e => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = ev => applyCustomBg(ev.target.result);
-    reader.readAsDataURL(file);
-  });
+function initBgUpload() {
+  bgInput.addEventListener('change', onBgFile);
+  const saved = localStorage.getItem('zxs_custom_bg');
+  if (saved) applyCustomBg(saved);
 }
 
 // ═══════════════════════════════════════════
@@ -940,39 +860,34 @@ function setTimer(min, label) {
   state.totalSeconds = min * 60;
   state.isBreak = label === 'Break';
   updateDisplay();
-  timerToggle.textContent = '开始学习';
-  timerToggle.className = 'btn btn-primary';
+  timerToggle.textContent = '开始学习'; timerToggle.className = 'btn btn-primary';
 }
 
 function startTimer() {
   if (state.minutes === 0 && state.seconds === 0) return;
   state.isRunning = true;
-  timerToggle.textContent = '暂停';
-  timerToggle.className = 'btn btn-secondary';
+  timerToggle.textContent = '暂停'; timerToggle.className = 'btn btn-secondary';
   state.interval = setInterval(tick, 1000);
 }
 
 function stopTimer() {
   state.isRunning = false;
   clearInterval(state.interval); state.interval = null;
-  timerToggle.textContent = '继续';
-  timerToggle.className = 'btn btn-primary';
+  timerToggle.textContent = '继续'; timerToggle.className = 'btn btn-primary';
 }
 
 function resetTimer() {
   stopTimer();
   const act = document.querySelector('#mode-segmented .active');
   setTimer(parseInt(act.dataset.min), act.dataset.label);
-  timerToggle.textContent = '开始学习';
-  timerToggle.className = 'btn btn-primary';
+  timerToggle.textContent = '开始学习'; timerToggle.className = 'btn btn-primary';
 }
 
 function tick() {
   if (state.seconds === 0) {
     if (state.minutes === 0) {
       stopTimer();
-      timerToggle.textContent = '完成 ✓';
-      timerToggle.className = 'btn btn-primary';
+      timerToggle.textContent = '完成 ✓'; timerToggle.className = 'btn btn-primary';
       state.todayFocus += state.totalSeconds / 60;
       updateStats(); beep();
       focusQuote.textContent = QUOTES[Math.floor(Math.random() * QUOTES.length)];
@@ -1086,6 +1001,7 @@ function playSound(id) {
   state.soundNodes[id] = n;
   updateSoundUI();
 }
+
 function stopSound() {
   if (state.currentSound && state.soundNodes[state.currentSound]) {
     try { state.soundNodes[state.currentSound].source.stop(); } catch(e) {}
@@ -1094,14 +1010,21 @@ function stopSound() {
   state.currentSound = null;
   updateSoundUI();
 }
+
 function updateSoundUI() {
   document.querySelectorAll('.sound-btn').forEach(b => b.classList.toggle('playing', b.dataset.sound === state.currentSound));
 }
 
 // ═══════════════════════════════════════════
-//  Music
+//  Music + Playlist
 // ═══════════════════════════════════════════
-function loadMusicUrl(url) {
+function detectMusicSource(url) {
+  if (url.includes('music.apple.com') || url.includes('embed.music.apple.com')) return 'apple';
+  if (url.includes('open.spotify.com') || url.includes('spotify.com/embed')) return 'spotify';
+  return null;
+}
+
+function toEmbedUrl(url) {
   let src = '';
   if (url.includes('music.apple.com') || url.includes('embed.music.apple.com')) {
     let m = url.match(/music\.apple\.com(\/[^\s?#]+)/);
@@ -1111,9 +1034,116 @@ function loadMusicUrl(url) {
     let m = url.match(/open\.spotify\.com(\/[^\s?#]+)/);
     if (m) { let p = m[1]; if (!p.includes('/embed/')) p = p.replace(/\/(playlist|track|album|episode)\//, '/embed/$1/'); src = 'https://open.spotify.com' + p; }
   } else if (url.includes('embed.music.apple.com') || url.includes('open.spotify.com/embed')) { src = url; }
-  if (!src) { musicEmbed.innerHTML = '<span style="color:#c0392b;">暂不支持的链接，请使用 Apple Music 或 Spotify</span>'; return; }
+  return src;
+}
+
+function extractName(url) {
+  // Try to extract a readable name from the URL
+  const match = url.match(/(?:playlist|album)\/([^/?]+)/i);
+  if (match) return decodeURIComponent(match[1].replace(/-/g, ' '));
+  return null;
+}
+
+function loadMusicUrl(url, saveToPlaylist = true) {
+  const src = toEmbedUrl(url);
+  if (!src) {
+    musicEmbed.innerHTML = '<span style="color:#c0392b;">暂不支持的链接，请使用 Apple Music 或 Spotify</span>';
+    return;
+  }
   musicEmbed.innerHTML = `<iframe src="${src.replace(/&/g,'&amp;').replace(/"/g,'&quot;')}" height="120" allow="autoplay *; encrypted-media *; fullscreen *" sandbox="allow-forms allow-scripts allow-same-origin allow-popups"></iframe>`;
+  musicInput.value = url;
+
+  // Save to playlist
+  if (saveToPlaylist) {
+    const source = detectMusicSource(url);
+    const sourceLabel = source === 'apple' ? 'Apple Music' : 'Spotify';
+    const icon = source === 'apple' ? '🍎' : '🟢';
+    let name = extractName(url);
+
+    // Check if already in playlist
+    const exists = state.playlist.some(p => p.url === url);
+    if (!exists) {
+      state.playlist.push({
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2,6),
+        name: name || '音乐 ' + (state.playlist.length + 1),
+        url: url,
+        source: sourceLabel,
+        icon: icon,
+      });
+      savePlaylist();
+      renderPlaylist();
+    }
+  }
+
   localStorage.setItem('zxs_music_url', url);
+}
+
+function savePlaylist() {
+  localStorage.setItem('zxs_playlist', JSON.stringify(state.playlist));
+}
+
+function loadPlaylist() {
+  try {
+    const data = localStorage.getItem('zxs_playlist');
+    if (data) state.playlist = JSON.parse(data);
+  } catch {}
+}
+
+function renderPlaylist() {
+  playlistEl.innerHTML = '';
+  playlistCnt.textContent = state.playlist.length + ' 首';
+
+  if (state.playlist.length === 0) {
+    playlistEl.innerHTML = '<li class="music-playlist-empty">还没有收藏的歌单</li>';
+    return;
+  }
+
+  state.playlist.forEach((item, i) => {
+    const li = document.createElement('li');
+
+    const icon = document.createElement('span');
+    icon.className = 'pl-icon';
+    icon.textContent = item.icon || '🎵';
+
+    const name = document.createElement('span');
+    name.className = 'pl-name';
+    name.textContent = item.name;
+
+    const source = document.createElement('span');
+    source.className = 'pl-source';
+    source.textContent = item.source;
+
+    const play = document.createElement('button');
+    play.className = 'pl-play';
+    play.textContent = '▶';
+    play.addEventListener('click', e => {
+      e.stopPropagation();
+      musicInput.value = item.url;
+      loadMusicUrl(item.url, false);
+      // Switch to currently playing
+      document.querySelectorAll('.music-playlist li').forEach(l => l.style.background = 'transparent');
+      li.style.background = 'var(--accent-light, rgba(139,111,78,0.1))';
+      li.style.borderRadius = '8px';
+      li.style.padding = '8px 4px';
+    });
+
+    const del = document.createElement('button');
+    del.className = 'pl-del';
+    del.textContent = '✕';
+    del.addEventListener('click', e => {
+      e.stopPropagation();
+      state.playlist.splice(i, 1);
+      savePlaylist();
+      renderPlaylist();
+    });
+
+    li.appendChild(icon);
+    li.appendChild(name);
+    li.appendChild(source);
+    li.appendChild(play);
+    li.appendChild(del);
+    playlistEl.appendChild(li);
+  });
 }
 
 // ═══════════════════════════════════════════
@@ -1171,24 +1201,20 @@ function buildSoundBoard() {
 //  Init
 // ═══════════════════════════════════════════
 function init() {
-  preloadImages();
-
-  const savedPreset = localStorage.getItem('zxs_preset') || 'study';
-  const savedCustom = localStorage.getItem('zxs_custom_bg');
-  if (savedCustom) applyCustomBg(savedCustom);
-  else applyPreset(savedPreset);
-
+  initBgUpload();
   todos = loadTodos();
   loadStats();
-  buildBgGrid();
+  loadPlaylist();
   buildSoundBoard();
   renderTodos();
+  renderPlaylist();
   updateStats();
   updateDisplay();
   focusQuote.textContent = QUOTES[Math.floor(Math.random() * QUOTES.length)];
 
+  // Restore last played music
   const savedMusic = localStorage.getItem('zxs_music_url');
-  if (savedMusic) { musicInput.value = savedMusic; loadMusicUrl(savedMusic); }
+  if (savedMusic) { musicInput.value = savedMusic; loadMusicUrl(savedMusic, false); }
 
   // Mode segmented
   document.querySelectorAll('#mode-segmented button').forEach(btn => {
@@ -1229,11 +1255,11 @@ function init() {
   });
 
   // Music
-  musicLoad.addEventListener('click', () => { const u = musicInput.value.trim(); if (u) loadMusicUrl(u); });
-  musicInput.addEventListener('keydown', e => { if (e.key === 'Enter') musicLoad.click(); });
-  document.querySelectorAll('.music-quick a').forEach(a => {
-    a.addEventListener('click', e => { e.preventDefault(); const u = a.dataset.url; musicInput.value = u; loadMusicUrl(u); });
+  musicLoad.addEventListener('click', () => {
+    const u = musicInput.value.trim();
+    if (u) loadMusicUrl(u);
   });
+  musicInput.addEventListener('keydown', e => { if (e.key === 'Enter') musicLoad.click(); });
 
   // Todo
   todoAdd.addEventListener('click', () => { addTodo(todoInput.value); todoInput.value = ''; todoInput.focus(); });
